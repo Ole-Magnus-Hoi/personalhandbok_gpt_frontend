@@ -55,7 +55,7 @@ function App() {
       <div className="buttons-container">
         <button type="submit" class="button-arounder">Send inn spørsmål</button>
       </div>
-      <div>
+      <div className='history'>
         {history.map((p, index) => {
         return <p key={index}>{p.question} : {p.answer}</p>
         })}
