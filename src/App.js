@@ -16,8 +16,8 @@ function PasswordPage({ children }) {
     if (password === process.env.REACT_APP_PASSWORD) {
       setAuthenticated(true);
     } else {
-      //alert(process.env.REACT_APP_PASSWORD);
-      alert('Incorrect password');
+      alert(process.env.REACT_APP_PASSWORD);
+      //alert('Incorrect password');
     }
   }
   if (authenticated) {
