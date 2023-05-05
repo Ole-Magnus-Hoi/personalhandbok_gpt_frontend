@@ -7,6 +7,39 @@ import ai_face1 from './ai_face.jpg';
 import ai_face2 from './ai_face2.jpg';
 
 
+function PasswordPage({ children }) {
+  const [password, setPassword] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
+
+  function handleSubmitPassword(event) {
+    event.preventDefault();
+    if (password === process.env.REACT_APP_PASSWORD) {
+      setAuthenticated(true);
+    } else {
+      //alert(process.env.REACT_APP_PASSWORD);
+      alert('Incorrect password');
+    }
+  }
+  if (authenticated) {
+    return children;
+  } else {
+    return (
+      <form onSubmit={handleSubmitPassword}>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+        <button type="submit">Enter</button>
+      </form>
+    );
+  }
+}
+
+
 function App() {
 
   const [question, setQuestion] = useState("")
@@ -33,6 +66,7 @@ function App() {
   }
 
   return (
+  <PasswordPage>
   <div className="App">
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
@@ -84,6 +118,7 @@ function App() {
     </div>
     </header>
   </div>
+  </PasswordPage>
 );
 }
 
