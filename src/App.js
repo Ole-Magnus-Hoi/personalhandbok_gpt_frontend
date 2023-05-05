@@ -108,7 +108,7 @@ function App() {
       </div>
     </form>
     <div style={{width: "1200px"}}>
-      {history.reverse().map((p, index) => {
+      {history.slice(0).reverse().map((p, index) => {
         return <div>
           <ChatContainer>
           <ChatBubble
