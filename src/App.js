@@ -64,11 +64,6 @@ function App() {
         <button type="submit" class="button-arounder">Send inn spørsmål</button>
       </div>
     </form>
-    {/*<div style={{width: "800px"}}>
-      {history.map((p, index) => {
-        return <p key={index}>{p.question} : {p.answer}</p>
-      })}
-    </div>*/}
     <div style={{width: "1200px"}}>
       {history.reverse().map((p, index) => {
         return <div>
