@@ -43,7 +43,6 @@ function PasswordPage({ children }) {
 function App() {
 
   const [question, setQuestion] = useState("")
-  const [answer, setAnswer] = useState("")   
   const [history, setHistory] = useState([]);
   
   const handleInput = event  => {
@@ -59,7 +58,6 @@ function App() {
     axios.post('/question', dataQ)
     .then(res => {
       const newAnswer = res.data;
-      setAnswer(newAnswer); // set the answer based on the server's response
       setHistory([...history, {question, answer:newAnswer}]);
     })
     .catch(err => console.error(err)); // handle any errors
