@@ -9,9 +9,6 @@ COPY . /app
 # ==== BUILD =====
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 RUN npm ci
-#Add env variable
-ARG REACT_APP_PASSWORD
-ENV REACT_APP_PASSWORD $REACT_APP_PASSWORD
 # Build the app
 RUN npm run build
 

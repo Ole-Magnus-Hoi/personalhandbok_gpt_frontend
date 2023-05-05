@@ -13,13 +13,24 @@ function PasswordPage({ children }) {
 
   function handleSubmitPassword(event) {
     event.preventDefault();
-    if (password === process.env.REACT_APP_PASSWORD) {
-      setAuthenticated(true);
-    } else {
-      alert(process.env.REACT_APP_PASSWORD);
-      //alert('Incorrect password');
+    event.preventDefault();
+    const pass = {
+      password: password
     }
+
+    axios.post('/password', pass)
+    .then(res => {
+      const acceptPassword = res.data;
+      setAuthenticated(acceptPassword);
+      if (!acceptPassword){
+        alert("Du må nok prøve igen!")
+      } else {
+        alert("Du er flink med passord og sånn.")
+      }
+    })
+    .catch(err => console.error(err)); // handle any errors
   }
+
   if (authenticated) {
     return children;
   } else {
