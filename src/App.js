@@ -70,7 +70,7 @@ function App() {
       })}
     </div>*/}
     <div style={{width: "1200px"}}>
-      {history.map((p, index) => {
+      {history.reverse().map((p, index) => {
         return <div>
           <ChatContainer>
           <ChatBubble
