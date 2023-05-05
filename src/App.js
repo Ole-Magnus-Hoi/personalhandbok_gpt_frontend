@@ -1,7 +1,10 @@
 import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import logo from './nor_logo.png'
+import logo from './nor_logo.png';
+import {ChatBubble, ChatContainer} from './ChatBubble';
+import ai_face1 from './ai_face.jpg';
+import ai_face2 from './ai_face2.jpg';
 
 
 function App() {
@@ -9,10 +12,6 @@ function App() {
   const [question, setQuestion] = useState("")
   const [answer, setAnswer] = useState("")   
   const [history, setHistory] = useState([]);
-
-  /*useEffect(() => {
-    axios.get('/api').then(res => setHistory(res.data));
-  }, [answer])*/
   
   const handleInput = event  => {
     setQuestion(event.target.value)
@@ -40,7 +39,16 @@ function App() {
       <p>
         Velkommen til Norconsults egne GPT for personalhåndboka.
       </p>
+      <a
+        className="App-link"
+        href="https://handbooks.simployer.com/nb-no/handbook/100640?sasid=d3e5400f-44fb-4e4d-94db-a65caadf25c1"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Personalhåndboka
+      </a>
       <form onSubmit={handleSubmit}>
+      <br></br>
       <div>Still et spørsmål!</div>
       <div className="form-control">
         <input
@@ -55,20 +63,30 @@ function App() {
       <div className="buttons-container">
         <button type="submit" class="button-arounder">Send inn spørsmål</button>
       </div>
-      <div className='history'>
-        {history.map((p, index) => {
-        return <p key={index}>{p.question} : {p.answer}</p>
-        })}
-      </div>
     </form>
-    <a
-        className="App-link"
-        href="https://handbooks.simployer.com/nb-no/handbook/100640?sasid=d3e5400f-44fb-4e4d-94db-a65caadf25c1"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Personalhåndboka
-      </a>
+    {/*<div style={{width: "800px"}}>
+      {history.map((p, index) => {
+        return <p key={index}>{p.question} : {p.answer}</p>
+      })}
+    </div>*/}
+    <div style={{width: "1200px"}}>
+      {history.map((p, index) => {
+        return <div>
+          <ChatContainer>
+          <ChatBubble
+            message={p.question}
+            side="left"
+            avatarUrl={ai_face2}
+          />
+          <ChatBubble
+            message={p.answer}
+            side="right"
+            avatarUrl={ai_face1}
+          />
+          </ChatContainer>
+        </div>
+      })}
+    </div>
     </header>
   </div>
 );
