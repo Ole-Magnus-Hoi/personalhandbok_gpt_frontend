@@ -63,7 +63,8 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const dataQ = {
-      question: question
+      question: question,
+      history: history
     }
 
     axios.post('/question', dataQ)
