@@ -86,7 +86,7 @@ function App() {
         Velkommen til Norconsults egne GPT for personalhåndboka.
       </p>
       <a
-        className="App-link"
+        className='App-link'
         href="https://handbooks.simployer.com/nb-no/handbook/100640?sasid=d3e5400f-44fb-4e4d-94db-a65caadf25c1"
         target="_blank"
         rel="noopener noreferrer"
