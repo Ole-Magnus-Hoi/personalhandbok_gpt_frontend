@@ -67,6 +67,8 @@ function App() {
       history: history
     }
 
+    setQuestion("")
+
     axios.post('/question', dataQ)
     .then(res => {
       const newAnswer = res.data;
