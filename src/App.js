@@ -2,9 +2,8 @@ import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import logo from './nor_logo.png';
-import {ChatBubble, ChatContainer} from './ChatBubble';
-import ai_face1 from './ai_face.jpg';
-import ai_face2 from './ai_face2.jpg';
+import { Button } from "@navikt/ds-react";
+import Chatting from './Chat';
 
 
 function PasswordPage({ children }) {
@@ -49,13 +48,12 @@ function PasswordPage({ children }) {
     );
   }
 }
-
-
 function App() {
 
   const [question, setQuestion] = useState("")
   const [history, setHistory] = useState([]);
-  
+  const [handlingInput, setHandlingInput] = useState(false);
+
   const handleInput = event  => {
     setQuestion(event.target.value)
   }
@@ -66,13 +64,13 @@ function App() {
       question: question,
       history: history
     }
-
     setQuestion("")
-
+    setHandlingInput(true)
     axios.post('/question', dataQ)
     .then(res => {
       const newAnswer = res.data;
       setHistory([...history, {question, answer:newAnswer}]);
+      setHandlingInput(false)
     })
     .catch(err => console.error(err)); // handle any errors
   }
@@ -107,26 +105,13 @@ function App() {
         />
       </div>
       <div className="buttons-container">
-        <button type="submit" class="button-arounder">Send inn spørsmål</button>
+        {handlingInput&&<Button loading>Tenker...</Button>}
+        {!handlingInput&&<Button type="submit" class="button-arounder">Send inn spørsmål</Button>}
       </div>
+      
     </form>
-    <div style={{width: "1200px"}}>
-      {history.slice(0).reverse().map((p, index) => {
-        return <div>
-          <ChatContainer>
-          <ChatBubble
-            message={p.question}
-            side="left"
-            avatarUrl={ai_face2}
-          />
-          <ChatBubble
-            message={p.answer}
-            side="right"
-            avatarUrl={ai_face1}
-          />
-          </ChatContainer>
-        </div>
-      })}
+    <div className='ChatDiv'>
+      <Chatting history={history}></Chatting>
     </div>
     </header>
   </div>
